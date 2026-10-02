@@ -1,0 +1,114 @@
+/* Custom Styling para sa System */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navbar Design */
+.custom-navbar {
+    background-color: #212529;
+    padding: 15px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.custom-navbar h3 {
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+/* Table Card Wrapper Design */
+.table-container {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Custom Table styling */
+.custom-table th {
+    background-color: #f1f3f5 !important;
+    color: #495057;
+    font-weight: 600;
+}
+
+.custom-table td, .custom-table th {
+    vertical-align: middle;
+    padding: 12px 15px;
+}
+
+/* Buttons Hover effect */
+.btn-add {
+    font-weight: 500;
+    padding: 8px 16px;
+}
+
+/* Professional Corporate Login Theme */
+.pro-login-body {
+    background: #0f172a; /* Sleek dark corporate background */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.pro-login-wrapper {
+    width: 100%;
+    max-width: 440px;
+    padding: 20px;
+}
+
+.pro-login-card {
+    border-radius: 16px;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.pro-icon-box {
+    width: 60px;
+    height: 60px;
+    background: #0f172a;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.2);
+}
+
+.tracking-wide {
+    letter-spacing: 0.5px;
+}
+
+.fs-7 {
+    font-size: 0.75rem;
+}
+
+.input-group .form-control:focus {
+    box-shadow: none;
+    border-color: #ced4da;
+    background-color: #fff !important;
+}
+
+/* Dashboard Theme Matchers */
+.bg-pro-dark {
+    background-color: #0f172a !important;
+}
+
+.pro-nav-icon {
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.table thead th {
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+}
