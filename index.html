@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black & Pink Neon Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="main-container">
+        <div class="calculator">
+            <div class="top-bar">
+                <span class="title">CYBER.CALC</span>
+                <button class="history-toggle-btn" onclick="toggleHistory()">HISTORY</button>
+            </div>
+
+            <div class="display">
+                <div id="previous-operand" class="previous-operand"></div>
+                <div id="current-operand" class="current-operand">0</div>
+            </div>
+
+            <div class="keypad">
+                <button class="key-btn btn-action" onclick="clearAll()">AC</button>
+                <button class="key-btn btn-action" onclick="deleteDigit()">⌫</button>
+                <button class="key-btn btn-action" onclick="appendNumber('%')">%</button>
+                <button class="key-btn btn-operator" onclick="appendOperator('/')">÷</button>
+
+                <button class="key-btn" onclick="appendNumber('7')">7</button>
+                <button class="key-btn" onclick="appendNumber('8')">8</button>
+                <button class="key-btn" onclick="appendNumber('9')">9</button>
+                <button class="key-btn btn-operator" onclick="appendOperator('*')">×</button>
+
+                <button class="key-btn" onclick="appendNumber('4')">4</button>
+                <button class="key-btn" onclick="appendNumber('5')">5</button>
+                <button class="key-btn" onclick="appendNumber('6')">6</button>
+                <button class="key-btn btn-operator" onclick="appendOperator('-')">-</button>
+
+                <button class="key-btn" onclick="appendNumber('1')">1</button>
+                <button class="key-btn" onclick="appendNumber('2')">2</button>
+                <button class="key-btn" onclick="appendNumber('3')">3</button>
+                <button class="key-btn btn-operator" onclick="appendOperator('+')">+</button>
+
+                <button class="key-btn" onclick="appendNumber('0')">0</button>
+                <button class="key-btn" onclick="appendNumber('.')">.</button>
+                <button class="key-btn btn-equal" onclick="compute()">=</button>
+            </div>
+        </div>
+
+        <div id="history-panel" class="history-panel">
+            <h3>History Log</h3>
+            <div id="history-list" class="history-list"></div>
+        </div>
+    </div>
+
+    <!-- JavaScript na nasa loob na mismo ng HTML para walang error sa pag-load -->
+    <script>
+        let currentOperandText = '0';
+        let previousOperandText = '';
+        let operation = null;
+
+        const currentOperandElem = document.getElementById('current-operand');
+        const previousOperandElem = document.getElementById('previous-operand');
+        const historyListElem = document.getElementById('history-list');
+        const historyPanelElem = document.getElementById('history-panel');
+        const historyToggleBtn = document.querySelector('.history-toggle-btn');
+
+        function toggleHistory() {
+            historyPanelElem.classList.toggle('show');
+            historyToggleBtn.classList.toggle('active');
+        }
+
+        function updateDisplay() {
+            currentOperandElem.innerText = currentOperandText;
+            previousOperandElem.innerText = previousOperandText;
+        }
+
+        function appendNumber(number) {
+            if (number === '.' && currentOperandText.includes('.')) return;
+            if (currentOperandText === '0' && number !== '.') {
+                currentOperandText = number;
+            } else {
+                currentOperandText += number;
+            }
+            updateDisplay();
+        }
+
+        function appendOperator(op) {
+            if (currentOperandText === '') return;
+            if (previousOperandText !== '') {
+                compute();
+            }
+            operation = op;
+            previousOperandText = `${currentOperandText} ${op}`;
+            currentOperandText = '';
+            updateDisplay();
+        }
+
+        function compute() {
+            let computation;
+            const prev = parseFloat(previousOperandText);
+            const current = parseFloat(currentOperandText);
+            
+            if (isNaN(prev) || isNaN(current)) return;
+
+            switch (operation) {
+                case '+':
+                    computation = prev + current;
+                    break;
+                case '-':
+                    computation = prev - current;
+                    break;
+                case '*':
+                    computation = prev * current;
+                    break;
+                case '/':
+                    computation = prev === 0 ? 0 : prev / current;
+                    break;
+                default:
+                    return;
+            }
+
+            const calculationString = `${previousOperandText} ${currentOperandText} = ${computation}`;
+            addHistory(calculationString);
+
+            currentOperandText = computation.toString();
+            operation = undefined;
+            previousOperandText = '';
+            updateDisplay();
+        }
+
+        function addHistory(text) {
+            const item = document.createElement('div');
+            item.classList.add('history-item');
+            item.innerText = text;
+            historyListElem.prepend(item);
+        }
+
+        function clearAll() {
+            currentOperandText = '0';
+            previousOperandText = '';
+            operation = null;
+            updateDisplay();
+        }
+
+        function deleteDigit() {
+            if (currentOperandText.length === 1) {
+                currentOperandText = '0';
+            } else {
+                currentOperandText = currentOperandText.slice(0, -1);
+            }
+            updateDisplay();
+        }
+    </script>
+</body>
+</html>
